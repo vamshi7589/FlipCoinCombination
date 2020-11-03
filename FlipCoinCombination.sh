@@ -1,4 +1,4 @@
-echo "****welcome to flip coin combination**********"
+echo "******welcome to flip coin combination**********"
 #!/bin/bash
 hcount=0
 tcount=0
