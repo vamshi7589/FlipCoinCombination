@@ -99,3 +99,60 @@ echo "THT % = $(( (${triplet[THT]} * 100 ) / $ttotal))"
 echo "HTT % = $(( (${triplet[HTT]} * 100 ) / $ttotal))"
 echo "TTT % = $(( (${triplet[TTT]} * 100 ) / $ttotal))"
 }
+
+function sortCombination(){
+	sortedsinglet=`for num1 in ${!singlet[@]}
+	do
+		echo -e ${singlet[$num1]}
+	done | awk '{print $1}' | sort -n`
+	sorteddoublet=`for num2 in ${!doublet[@]}
+	do
+		echo -e ${doublet[$num2]}
+	done | awk '{print $1}' | sort -n`	
+	sortedtriplet=`for num3 in ${!triplet[@]}
+	do
+		echo -e ${triplet[$num3]}
+	done | awk '{print $1}' | sort -n`
+
+echo "-----------Sorted-------------"
+echo "sorted singlet : " $sortedsinglet
+echo "sorted doublet : " $sorteddoublet
+echo "sorted triplet : " $sortedtriplet
+}
+
+function getWinner(){
+winnersinglet=''
+winnerdoublet=''
+winnertriplet=''
+	for num1 in ${!singlet[@]}
+	do
+		if [ ${singlet[$num1]} -eq 21 ]
+		then
+			winnersinglet=$num1
+		fi
+	done
+	for num2 in ${!doublet[@]}
+	do
+		if [ ${doublet[$num2]} -eq 21 ]
+		then
+			winnerdoublet=$num2
+		fi		
+	done
+	for num3 in ${!triplet[@]}
+	do
+		if [ ${triplet[$num3]} -eq 21 ]
+		then
+			winnertriplet=$num3
+		fi
+	done
+echo "-----------Winners-------------"
+echo "Singlet Winner : $winnersinglet"
+echo "Doublet Winner : $winnerdoublet"
+echo "Triplet Winner : $winnertriplet"
+}
+
+singletheadTailGenerate
+doubletheadTailGenerate
+tripletheadTailGenerate
+sortCombination
+getWinner
